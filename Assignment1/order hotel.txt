@@ -1,0 +1,76 @@
+PROBLEM: BOOK A HOTEL BEFORE ON A TRIP.
+
+Identify objects and Behaviors:
+
+Objects:
+Traveler:
+		Data: Name, Address, Phone, Dates, ID
+		Behaviors: search, read, compare, book, cancel
+		
+Internet:
+		Data: Collection of websites
+		Behaviors: search,connect
+		
+ElectronicWebsite: 
+		Data: URL, Rooms, BankAccount
+		Behaviors: search for different rooms, sort, display, Compare, checkIDs, placeOrder
+		
+Hotel:
+		Data: Price, type(Single, Double, Deluxe, Standard), facilities
+		Behavior:
+		
+CreditCard:
+		Data: Number, Name, Company, expiry, security code
+		Behavior: charge
+
+CreditcardCompany:
+		Behavior: authorizeTransaction
+
+		
+Sequence of invoking behaviors on Objects:
+
+        Traveler Annie,
+	Internet internet,
+	ElectronicWebsite Expedia,
+	Hotel HolidayInn,
+	CreditCard card,
+	CreditCardCompany xyz,
+	bookingConfirmation response,
+	
+	if internet.isAvailable
+		 Annie.searchForWebsite-> internet,Question:Collection of websites to book hotel
+			pageNumber=1;
+			Loop
+				Annie.websiteFound-> internet, pageNumber, question  :website 
+				Expedia=website;
+				if Expedia != Null
+					break;
+				else
+					pageNumber=pageNumber+1;
+				end
+			end
+					Expedia.searchHotel-> Location, Arrival date, Departure date : List of hotels available
+					HolidayInn=hotel;
+					Annie.bookHotel-> hotel, name, address,creditCard,ID :bookingConfirmation
+					response= bookingConfirmation
+				end
+				else
+					Annie.hotelNotFound
+				end	
+	end			
+	else
+		internet not working
+	end
+					
+					
+			
+				
+			
+				
+	
+	
+	
+	
+
+
+

@@ -1,0 +1,81 @@
+PROBLEM: ORDER A FOOD ONLINE
+
+Identify objects and Behaviors:
+
+Objects:
+Customer:
+		Data: Name, Address, Phone
+		Behaviors: search, read, compare, order, cancel
+		
+Internet:
+		Data: Collection of websites
+		Behaviors: searchForHotels
+		
+Hotel: 
+		Data: URL, menu, BankAccount, ID
+		Behaviors: search, sort, display, Compare, placeOrder,delivery
+
+Food:
+		Data: categories,type,size, price 
+				
+CreditCard:
+		Data: Number, Name, Company, expiry, security code
+		Behavior: 
+		
+CreditcardCompany:
+		Behavior: authorizeTransaction
+
+		
+Sequence of invoking behaviors on Objects:
+
+    Customer Annie,
+	Internet internet,
+	Hotel Pizzahut,
+	Food cheesepizza;
+	CreditCard card,
+	CreditCardCompany xyz,
+	bookingConfirmation response,
+	
+	if internet.isAvailable
+		Annie.searchForWebsite-> internet,Question:Collection of websites of restaurant
+		pageNumber=1;
+		Loop
+			Annie.websiteFound-> internet, pageNumber, question  :website 
+			Pizzahut=website;
+			if Pizzahut != Null
+				break;
+			else
+				pageNumber=pageNumber+1;
+			end
+		end
+			Pizzahut.searchfood-> type of pizzas, size, toppings,veg/non-veg,price : List of pizzas 
+			loop
+				Pizza.selectPizza-> list of pizzas: pizza
+				cheesepizza=food;
+				Annie.placeOrder-> pizza, name, address,creditCard,ID :bookingConfirmation
+				response= bookingConfirmation
+				want to add more items?(y/n) : answer
+				if answer is n
+					break;
+				end
+			end
+			else
+				Annie.hotelNotFound
+			end
+	end			
+	else
+		internet not working
+	end
+					
+					
+			
+				
+			
+				
+	
+	
+	
+	
+
+
+

@@ -1,0 +1,114 @@
+PROBLEM: DESIGN A JOB SEARCHING AND POSTING PLATFORM
+
+Identify objects and Behaviors:
+
+Objects:
+JobSeeker:
+		Data: Name, Address, Phone, ID, resume
+		Behaviors: search, read, compare, apply, cancel
+
+Internet:
+		Data: collection of websites
+		Behaviors: search, update, create
+Job:
+		Data: jobId, skill set required, job responsibilities
+		Behaviors: 	
+		
+Employer:
+		Data:company name, address, job description, number of openings, job title
+		Behaviors: post job, review, reject, approve
+		
+ElectronicWebsite: 
+		Data: URL, jobseeker account employer account
+		Behaviors: search, sort, display, Compare, apply
+		
+
+Sequence of invoking behaviors on Objects:
+
+        JobSeeker Annie,
+	Internet internet,
+	Job myJob,
+	ElectronicWebsite LinkedIn,
+	Employer Apple,
+	ApplicationResponse applicationResponse,
+	JobpostinResponse postingResponse;
+	
+	if internet.isAvailable
+	
+		 Annie.searchForWebsite-> internet,Question:Collection of websites to apply for job
+			pageNumber=1;
+			Loop
+				
+				Annie.websiteFound-> internet, pageNumber, question  :website 
+				LinkedIn=website;
+				if LinkedIn!= Null
+					break;
+				else
+					pageNumber=pageNumber+1;
+				end
+			end
+			
+CASE1- APPLY FOR JOB-
+
+		if LinkedIn is not Null
+			if not registered user
+				Annie.signUpLinkedIn-> LinkedIn, name, address, ID, Resume,experience, skills : registered
+			end
+			else
+				Annie.signInLinkedIn-> LinkedIn, name, password  :authorize
+				if authorize is true
+					Annie.searchJob-> LinkedIn, job title, skills, salary: list of matching jobs available
+						loop
+							Annie.findDesirablejob -> list of jobs :job
+							myJob= job;
+							Annie.applyJob-> LinkedIn,myJob :applicationResponse
+							if applicationResponse is true
+								application accepted
+								want to apply for another job(y/N) :answer
+								if answer is N;
+									break;
+								end
+							end
+						end
+				end
+				else
+					Authorization failed
+				end
+			end
+		end
+		else
+			application is not responding
+		end
+			
+			
+
+CASE2- EMPLOYER WANTS TO POST A JOB-
+
+		if LinkedIn is not Null
+			if not registered user
+				Apple.signUpEmployer-> LinkedIn, Company name, address,company description: registered
+			end
+			else
+				Apple.signInAsEmployer-> LinkedIn, name, password  :authorize
+				if authorize is true
+					loop
+					Apple.postJob -> job description, job responsibilities, skill set: jobpostingResponse
+					if jobpostingResponse is true
+						Job posted successfully and job ID is created
+						want to post another job(y/N) :answer
+						if answer is N;
+							break;
+					end
+				end
+				else
+					Authorization failed
+				end
+			end
+		end
+		else
+			application is not responding
+		end
+	end
+	else
+		can not connect	
+	end		

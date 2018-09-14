@@ -1,0 +1,88 @@
+PROBLEM: DESIGN A COURSE REGISTRATION PLATFORM
+
+Identify objects and Behaviors:
+
+Objects:
+Student:
+		Data: Name, Address, Phone, student ID, enrolled degree
+		Behaviors: search, register, drop, login, logout
+
+Internet:
+		Data: search university portal
+		Behaviors: search, navigate through web pages
+
+Terms: 
+		Data: available terms(fall2018, spring 2018 etc)
+ 	
+course:
+		Data:course name, syllabus,professor name, type(online,on ground)
+
+ElectronicWebsite: 
+		Data: URL, student account
+		Behaviors: search, sort, display, assign course,reject, approve
+		
+
+Sequence of invoking behaviors on Objects:
+
+    Student Sailee,
+	Internet internet,
+	Term fall2018
+	ElectronicWebsite myNeu,
+	Course AED,
+	AddResponse addResponse,
+	DropResponse dropResponse,
+	
+	if internet.isAvailable
+		Sailee.goToWebsite-> internet, URL :Website 
+		myNeu= website;
+		if myNeu is not Null
+			Sailee.signInmyNeu-> internet,myNeu, student ID, password  :authorize
+			if authorize is true
+				Sailee.selectTerm-> myNeu:term
+				fall2018= term;
+				
+CASE1 ADD COURSES
+
+				Sailee.searchcourses-> myNeu, fall 2018 : list of courses available
+				loop			
+					Sailee.selectCourse-> list of courses available :course
+					AED= course;												
+					if course.seatAvailable-> AED : response
+						response1=response
+						if response is true
+							course added successfully
+							want to add another course(y/n):answer
+							if answer= n
+								break;
+						end
+					end
+					else
+						seats not available
+					end
+				end
+					
+CASE2 DROP COURSES
+
+				Sailee.viewRegisteredCourses->myNeu,fall 2018: list of courses registered
+				Sailee.selectCoursetoDrop-> list of courses registered: course
+				AED=course;
+				Sailee.dropCourse-> AED :dropResponse
+				if dropResponse is true
+					dropped successfully
+				end
+				else
+					error while dropping
+				end
+			end	
+			else
+				Authorisation failed
+			end
+		else
+			can't connect to website
+		end
+	end	
+	else
+		internet not working
+	end	
+		
+

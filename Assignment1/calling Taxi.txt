@@ -1,0 +1,105 @@
+PROBLEM: DESIGN A APPLICATION FOR CALLING TAXI
+
+Identify objects and Behaviors:
+
+Objects:
+Traveler:
+		Data: Name, Address, Phone, current location, destination, email address
+		Behaviors: search, compare, book, cancel
+		
+Internet:
+		Data: Location,
+		Behaviors: search for taxis, communication
+		
+Driver: 
+		Data: Name, car number, location
+		Behaviors: confirm pick up, update location, communication
+		
+Application:
+		Data: details of customer(name, address,ID), details of drivers, bank account
+		Behavior: search, store, confirm, reject,authorize
+		
+CreditCard:
+		Data: Number, Name, Company, expiry, security code
+		Behavior:
+		
+CreditcardCompany:
+		Behavior: authorizeTransaction
+
+		
+Sequence of invoking behaviors on Objects:
+
+        Traveler Annie,
+	Internet internet,
+	Location location,
+	Driver Sam,
+	Application UBER,
+	CreditCard card,
+	CreditCardCompany xyz,
+	BookingResponse bookingResponse,
+	PaymentResponse paymentResponse,
+	CancelResponse cancelResponse,
+	
+	
+	
+	if internet.isAvailable
+		if UBER is not Null
+			if not registered user
+				Annie.signUpUber-> UBER, name, address, credit card details: registered
+			else
+				Annie.signInUber-> UBER, name, password  :authorize
+				if authorize is true
+					if location is enabled
+						
+						Annie.searchTaxi-> UBER, current location, destination, no of passengers, type(pool, express)
+											: list of taxi and driver combination available in nearer area
+						loop
+							Annie.findDesirableTaxi -> list of drivers and taxi combination  :driver
+							Sam= driver;
+							UBER.confirmBooking-> driver :bookingResponse
+							if response is true
+								booking confirmed
+								generate order ID
+							break;
+							end
+						end
+						Annie.makePayment-> calculated fare :paymentResponse
+						if paymentResponse is true
+							payment approved
+						else
+							try another payment method
+						end	
+					end
+					else
+						location is not enabled
+					end
+				end
+				else
+					Authorization failed
+				end
+		end
+		else
+			application is not responding
+		end
+	end		
+	else
+		can not connect
+	end
+	
+	CANCEL RIDE-
+				Annie.signInUber-> UBER, name, password  :authorize
+				if authorize is true
+					Annie.cancelOrder -> UBER, order status,order ID :cancelResponse
+					if response is true
+						order canceled
+					else
+						can not cancel order
+					end
+				end
+				else
+					authorization failed
+				end
+				
+	
+	
+	
