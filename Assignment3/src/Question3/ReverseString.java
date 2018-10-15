@@ -1,4 +1,7 @@
 package Question3;
+//score: 0/2
+//your result has a extra space in the end
+//you are using javascript in the question, not java 
 
 public class ReverseString {
 	public String reverseString(String s) {
