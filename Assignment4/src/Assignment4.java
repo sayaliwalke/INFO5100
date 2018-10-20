@@ -6,9 +6,12 @@ public class Assignment4 {
 	 * index. If it doesn't exist, return -1.
 	 */
 	public int firstUniqChar(String s) {
-
+		if(s==null)
+		{
+			return -1;
+		}
 		char count[] = new char[57];
-
+		
 		for (int i = 0; i < s.length(); i++) {
 			count[s.charAt(i) - 65]++;
 
@@ -27,6 +30,7 @@ public class Assignment4 {
 		} else {
 			System.out.println("\nThe string contain all repeating characters hence index is  " + index);
 		}
+		
 		return index;
 	}
 
@@ -129,6 +133,7 @@ public class Assignment4 {
 
 	public static void main(String Arg[]) {
 		Assignment4 a = new Assignment4();
+		
 		a.firstUniqChar("ddaakk");
 		a.addDigits(7654);
 		a.moveZeroes(new int[] { 0, 1, 0, 3, 12 });
