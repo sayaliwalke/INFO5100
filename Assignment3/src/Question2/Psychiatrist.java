@@ -1,6 +1,6 @@
 package Question2;
 
-
+//score 5/5
 public class Psychiatrist {
 	public void examine(MoodyObject moodyObject) {
 		System.out.println("How are you feeling today ");
